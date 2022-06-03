@@ -1,0 +1,19 @@
+.map {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.leaflet-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  left: 50%;
+  transform: translateX(-50%);
+
+  .leaflet-control-attribution {
+    a {
+      display: none;
+    }
+  }
+}
