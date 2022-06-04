@@ -21,6 +21,8 @@ code {
 
   background-repeat: no-repeat;
   background-position: 50%;
+
+  position: relative;
 }
 
 .gutter.gutter-horizontal {

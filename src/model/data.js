@@ -20,7 +20,8 @@ export const data = [
   {
     key: "4",
     request: "Заявка 4",
-    loading: "4",
+    loading: "kjhdkhfkdj djhfkdhfkd ddhfkdhf",
+    // loading: "kjhdkhfkdj",
     unloading: "3",
   },
   {
@@ -36,15 +37,18 @@ export const columns = [
     title: "Заявка",
     dataIndex: "request",
     key: "request",
+    width: 100,
   },
   {
     title: "Погрузка",
     dataIndex: "loading",
     key: "loading",
+    width: 100,
   },
   {
     title: "Разгрузка",
     dataIndex: "unloading",
     key: "unloading",
+    width: 100,
   },
 ];
