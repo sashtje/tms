@@ -11,7 +11,11 @@ const SelectStart = ({ defaultValue }) => {
   };
 
   return (
-    <Select defaultValue={defaultValue} onChange={handleChange}>
+    <Select
+      defaultValue={defaultValue}
+      onChange={handleChange}
+      className="select"
+    >
       {startPoints.map(({ title }) => (
         <Option key={title}>{title}</Option>
       ))}

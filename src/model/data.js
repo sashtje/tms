@@ -1,5 +1,4 @@
-import SelectStart from "../components/SelectStart";
-import SelectFinish from "../components/SelectFinish";
+import SelectEdit from "../components/SelectEdit";
 
 export const startPoints = [
   {
@@ -70,12 +69,16 @@ export const columns = [
     title: "Погрузка",
     dataIndex: "loading",
     key: "loading",
-    render: (_, { loading }) => <SelectStart defaultValue={loading} />,
+    render: (_, { loading, number }) => (
+      <SelectEdit type="loading" defaultValue={loading} number={number} />
+    ),
   },
   {
     title: "Разгрузка",
     dataIndex: "unloading",
     key: "unloading",
-    render: (_, { unloading }) => <SelectFinish defaultValue={unloading} />,
+    render: (_, { unloading, number }) => (
+      <SelectEdit type="unloading" defaultValue={unloading} number={number} />
+    ),
   },
 ];

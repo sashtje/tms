@@ -4,6 +4,7 @@ import { Table } from "antd";
 
 import Map from "../components/Map";
 
+import { Context } from "../context";
 import { columns, data } from "../model/data";
 
 import "./styles.scss";
@@ -26,21 +27,23 @@ function App() {
   };
 
   return (
-    <Split minSize={0} className="page">
-      <Table
-        columns={columns}
-        dataSource={data}
-        scroll={{ x: "auto" }}
-        pagination={{
-          pageSize: 10,
-        }}
-        className="table"
-        onRow={onClickRow}
-        rowClassName={setRowClassName}
-      />
+    <Context.Provider value={{ selectedRow }}>
+      <Split minSize={0} className="page">
+        <Table
+          columns={columns}
+          dataSource={data}
+          scroll={{ x: "auto" }}
+          pagination={{
+            pageSize: 10,
+          }}
+          className="table"
+          onRow={onClickRow}
+          rowClassName={setRowClassName}
+        />
 
-      <Map />
-    </Split>
+        <Map />
+      </Split>
+    </Context.Provider>
   );
 }
 

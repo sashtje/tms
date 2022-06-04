@@ -11,7 +11,11 @@ const SelectFinish = ({ defaultValue }) => {
   };
 
   return (
-    <Select defaultValue={defaultValue} onChange={handleChange}>
+    <Select
+      defaultValue={defaultValue}
+      onChange={handleChange}
+      className="select"
+    >
       {finishPoints.map(({ title }) => (
         <Option key={title}>{title}</Option>
       ))}
