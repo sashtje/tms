@@ -1,13 +1,17 @@
 import Split from "react-split";
+import { Table } from "antd";
 
 import Map from "../components/Map";
+
+import { columns, data } from "../model/data";
 
 import "./styles.scss";
 
 function App() {
   return (
-    <Split sizes={[10, 90]} minSize={0} gutterAlign="start" className="page">
-      <div>Pane1</div>
+    <Split minSize={0} className="page">
+      <Table columns={columns} dataSource={data} />
+
       <Map />
     </Split>
   );
