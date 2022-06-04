@@ -5,5 +5,22 @@
     td {
       white-space: nowrap;
     }
+
+    &__row {
+      cursor: pointer;
+    }
+
+    &__selected-row {
+      background-color: #b0e0f7;
+
+      .ant-table-cell-fix-left {
+        background-color: #b0e0f7;
+      }
+    }
+
+    .ant-table-tbody > tr.table__selected-row.ant-table-row:hover > td,
+    .ant-table-tbody > tr.table__selected-row > td.ant-table-cell-row-hover {
+      background-color: #56c4f8;
+    }
   }
 }
