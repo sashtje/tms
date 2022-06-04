@@ -1,3 +1,9 @@
 .page {
   display: flex;
+
+  .table {
+    td {
+      white-space: nowrap;
+    }
+  }
 }

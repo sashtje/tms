@@ -1,54 +1,81 @@
-export const data = [
+import SelectStart from "../components/SelectStart";
+import SelectFinish from "../components/SelectFinish";
+
+export const startPoints = [
   {
-    key: "1",
-    request: "Заявка 1",
-    loading: "3",
-    unloading: "4",
+    title: "Москва",
+    point: [],
   },
   {
-    key: "2",
-    request: "Заявка 2",
-    loading: "5",
-    unloading: "3",
+    title: "Балашиха",
+    point: [],
   },
   {
-    key: "3",
-    request: "Заявка 3",
-    loading: "2",
-    unloading: "3",
+    title: "Химки",
+    point: [],
   },
   {
-    key: "4",
-    request: "Заявка 4",
-    loading: "kjhdkhfkdj djhfkdhfkd ddhfkdhf",
-    // loading: "kjhdkhfkdj",
-    unloading: "3",
+    title: "Домодедово",
+    point: [],
   },
   {
-    key: "5",
-    request: "Заявка 5",
-    loading: "5",
-    unloading: "6",
+    title: "Мытищи",
+    point: [],
   },
 ];
 
+export const finishPoints = [
+  {
+    title: "Санкт-Петербург",
+    point: [],
+  },
+  {
+    title: "Архангельск",
+    point: [],
+  },
+  {
+    title: "Воронеж",
+    point: [],
+  },
+  {
+    title: "Сыктывкар",
+    point: [],
+  },
+  {
+    title: "Пермь",
+    point: [],
+  },
+];
+
+export const data = [];
+
+for (let i = 0; i < 5; i++) {
+  data.push({
+    key: `${i + 1}`,
+    number: i + 1,
+    request: `Заявка №${i + 1}`,
+    loading: startPoints[i].title,
+    unloading: finishPoints[i].title,
+  });
+}
+
 export const columns = [
+  { title: "№", dataIndex: "number", key: "number", fixed: "left" },
   {
     title: "Заявка",
     dataIndex: "request",
     key: "request",
-    width: 100,
   },
   {
     title: "Погрузка",
     dataIndex: "loading",
     key: "loading",
-    width: 100,
+    render: (_, { loading }) => <SelectStart defaultValue={loading} />,
   },
   {
     title: "Разгрузка",
     dataIndex: "unloading",
     key: "unloading",
-    width: 100,
+    render: (_, { unloading }) => <SelectFinish defaultValue={unloading} />,
   },
 ];

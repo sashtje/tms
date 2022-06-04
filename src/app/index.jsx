@@ -1,14 +1,24 @@
 import Split from "react-split";
+import { Table } from "antd";
 
 import Map from "../components/Map";
-import RequestsTable from "../components/RequestsTable";
+
+import { columns, data } from "../model/data";
 
 import "./styles.scss";
 
 function App() {
   return (
     <Split minSize={0} className="page">
-      <RequestsTable />
+      <Table
+        columns={columns}
+        dataSource={data}
+        scroll={{ x: "auto" }}
+        pagination={{
+          pageSize: 10,
+        }}
+        className="table"
+      />
 
       <Map />
     </Split>
