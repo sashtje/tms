@@ -11,6 +11,7 @@ function App() {
   const [selectedRow, setSelectedRow] = useState();
   const [requests, setRequests] = useState(data);
   const [updateMapSize, setUpdateMapSize] = useState(false);
+  const [polyline, setPolyline] = useState([]);
 
   return (
     <Context.Provider
@@ -21,6 +22,8 @@ function App() {
         setRequests,
         updateMapSize,
         setUpdateMapSize,
+        polyline,
+        setPolyline,
       }}
     >
       <Requests />
