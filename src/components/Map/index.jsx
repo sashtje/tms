@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
+import ChangeView from "./ChangeView";
+
 import { Context } from "../../context";
 import { startPoints, finishPoints } from "../../model/data";
 
@@ -49,18 +51,18 @@ const Map = () => {
   return (
     <div className="map">
       <MapContainer center={returnCenterPoint(selectedRow, requests)} zoom={5}>
+        <ChangeView center={returnCenterPoint(selectedRow, requests)} />
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
         {selectedRow && (
           <>
             <Marker position={getStartMarkerCoordinates(selectedRow, requests)}>
-              <Popup>Start</Popup>
+              <Popup>Погрузка</Popup>
             </Marker>
 
             <Marker
               position={getFinishMarkerCoordinates(selectedRow, requests)}
             >
-              <Popup>Finish</Popup>
+              <Popup>Разгрузка</Popup>
             </Marker>
           </>
         )}
