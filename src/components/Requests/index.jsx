@@ -8,7 +8,13 @@ import SelectEdit from "../SelectEdit";
 import { Context } from "../../context";
 
 const Requests = () => {
-  const { selectedRow, setSelectedRow, requests } = useContext(Context);
+  const {
+    selectedRow,
+    setSelectedRow,
+    requests,
+    updateMapSize,
+    setUpdateMapSize,
+  } = useContext(Context);
 
   const columns = [
     { title: "№", dataIndex: "number", key: "number", fixed: "left" },
@@ -49,8 +55,12 @@ const Requests = () => {
       : "table__row";
   };
 
+  const handleDrag = (sizes) => {
+    setUpdateMapSize((updateMapSize) => !updateMapSize);
+  };
+
   return (
-    <Split minSize={0} className="page">
+    <Split minSize={0} className="page" onDrag={handleDrag}>
       <Table
         columns={columns}
         dataSource={requests}

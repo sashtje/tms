@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import ChangeView from "./ChangeView";
+import UpdateSize from "./UpdateSize";
 
 import { Context } from "../../context";
 import { startPoints, finishPoints } from "../../model/data";
@@ -9,7 +10,7 @@ import { startPoints, finishPoints } from "../../model/data";
 import "./styles.scss";
 
 const Map = () => {
-  const { selectedRow, requests } = useContext(Context);
+  const { selectedRow, requests, updateMapSize } = useContext(Context);
 
   const getCoordinates = (arrayPoints, pointTitle) => {
     const point = arrayPoints.find(({ title }) => title === pointTitle);
@@ -52,6 +53,8 @@ const Map = () => {
     <div className="map">
       <MapContainer center={returnCenterPoint(selectedRow, requests)} zoom={5}>
         <ChangeView center={returnCenterPoint(selectedRow, requests)} />
+        <UpdateSize updateMapSize={updateMapSize} />
+
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {selectedRow && (
           <>
