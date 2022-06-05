@@ -1,48 +1,46 @@
-import SelectEdit from "../components/SelectEdit";
-
 export const startPoints = [
   {
     title: "Москва",
-    point: [],
+    point: [55.767607, 37.621076],
   },
   {
     title: "Балашиха",
-    point: [],
+    point: [55.797367, 37.934474],
   },
   {
     title: "Химки",
-    point: [],
+    point: [55.89808, 37.446458],
   },
   {
     title: "Домодедово",
-    point: [],
+    point: [55.432927, 37.767131],
   },
   {
     title: "Мытищи",
-    point: [],
+    point: [55.910504, 37.736364],
   },
 ];
 
 export const finishPoints = [
   {
     title: "Санкт-Петербург",
-    point: [],
+    point: [59.909374, 30.240424],
   },
   {
     title: "Архангельск",
-    point: [],
+    point: [64.569901, 40.569553],
   },
   {
     title: "Воронеж",
-    point: [],
+    point: [51.677647, 39.172394],
   },
   {
     title: "Сыктывкар",
-    point: [],
+    point: [61.669058, 50.847904],
   },
   {
     title: "Пермь",
-    point: [],
+    point: [58.006597, 56.256605],
   },
 ];
 
@@ -57,28 +55,3 @@ for (let i = 0; i < 5; i++) {
     unloading: finishPoints[i].title,
   });
 }
-
-export const columns = [
-  { title: "№", dataIndex: "number", key: "number", fixed: "left" },
-  {
-    title: "Заявка",
-    dataIndex: "request",
-    key: "request",
-  },
-  {
-    title: "Погрузка",
-    dataIndex: "loading",
-    key: "loading",
-    render: (_, { loading, number }) => (
-      <SelectEdit type="loading" defaultValue={loading} number={number} />
-    ),
-  },
-  {
-    title: "Разгрузка",
-    dataIndex: "unloading",
-    key: "unloading",
-    render: (_, { unloading, number }) => (
-      <SelectEdit type="unloading" defaultValue={unloading} number={number} />
-    ),
-  },
-];

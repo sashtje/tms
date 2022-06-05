@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Select } from "antd";
 
 import { startPoints } from "../../model/data";
+import { Context } from "../../context";
 
 const { Option } = Select;
 
 const SelectStart = ({ defaultValue }) => {
+  const { selectedRow, setRequests } = useContext(Context);
+
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    setRequests((prevRequests) => {
+      const updatedRequests = [...prevRequests];
+      updatedRequests[selectedRow - 1].loading = value;
+      return updatedRequests;
+    });
   };
 
   return (

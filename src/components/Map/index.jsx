@@ -1,16 +1,69 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+
+import { Context } from "../../context";
+import { startPoints, finishPoints } from "../../model/data";
 
 import "./styles.scss";
 
 const Map = () => {
+  const { selectedRow, requests } = useContext(Context);
+
+  const getCoordinates = (arrayPoints, pointTitle) => {
+    const point = arrayPoints.find(({ title }) => title === pointTitle);
+
+    return point.point;
+  };
+
+  const returnCenterPoint = (selectedRow, requests) => {
+    if (!selectedRow) {
+      return [55.75232, 37.6116908];
+    }
+
+    const index = selectedRow - 1;
+    const start = requests[index].loading;
+    const finish = requests[index].unloading;
+    const startCoordinates = getCoordinates(startPoints, start);
+    const finishCoordinates = getCoordinates(finishPoints, finish);
+
+    return [
+      (startCoordinates[0] + finishCoordinates[0]) / 2,
+      (startCoordinates[1] + finishCoordinates[1]) / 2,
+    ];
+  };
+
+  const getStartMarkerCoordinates = (selectedRow, requests) => {
+    const index = selectedRow - 1;
+    const start = requests[index].loading;
+
+    return getCoordinates(startPoints, start);
+  };
+
+  const getFinishMarkerCoordinates = (selectedRow, requests) => {
+    const index = selectedRow - 1;
+    const finish = requests[index].unloading;
+
+    return getCoordinates(finishPoints, finish);
+  };
+
   return (
     <div className="map">
-      <MapContainer center={[55.75232, 37.6116908]} zoom={5}>
+      <MapContainer center={returnCenterPoint(selectedRow, requests)} zoom={5}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <Marker position={[55.75232, 37.6116908]}>
-          <Popup></Popup>
-        </Marker>
+
+        {selectedRow && (
+          <>
+            <Marker position={getStartMarkerCoordinates(selectedRow, requests)}>
+              <Popup>Start</Popup>
+            </Marker>
+
+            <Marker
+              position={getFinishMarkerCoordinates(selectedRow, requests)}
+            >
+              <Popup>Finish</Popup>
+            </Marker>
+          </>
+        )}
       </MapContainer>
     </div>
   );
