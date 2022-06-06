@@ -1,33 +1,16 @@
-import { useState } from "react";
+import { Provider } from "react-redux";
 
 import Requests from "../components/Requests";
 
-import { Context } from "../context";
-import { data } from "../model/data";
+import { store } from "./../store";
 
 import "./styles.scss";
 
 function App() {
-  const [selectedRow, setSelectedRow] = useState();
-  const [requests, setRequests] = useState(data);
-  const [updateMapSize, setUpdateMapSize] = useState(false);
-  const [polyline, setPolyline] = useState([]);
-
   return (
-    <Context.Provider
-      value={{
-        selectedRow,
-        setSelectedRow,
-        requests,
-        setRequests,
-        updateMapSize,
-        setUpdateMapSize,
-        polyline,
-        setPolyline,
-      }}
-    >
+    <Provider store={store}>
       <Requests />
-    </Context.Provider>
+    </Provider>
   );
 }
 

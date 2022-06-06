@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   MapContainer,
   TileLayer,
@@ -10,15 +11,17 @@ import {
 import ChangeView from "./ChangeView";
 import UpdateSize from "./UpdateSize";
 
-import { Context } from "../../context";
+import { fetchPath } from "../../store/polylineReducer";
 import { startPoints, finishPoints } from "../../model/data";
-import { getPolyline } from "../../api";
 
 import "./styles.scss";
 
 const Map = () => {
-  const { selectedRow, requests, updateMapSize, polyline, setPolyline } =
-    useContext(Context);
+  const { selectedRow, requests, updateMapSize } = useSelector(
+    (state) => state.requestsReducer
+  );
+  const { polyline } = useSelector((state) => state.polylineReducer);
+  const dispatch = useDispatch();
 
   const getCoordinates = (arrayPoints, pointTitle) => {
     const point = arrayPoints.find(({ title }) => title === pointTitle);
@@ -59,40 +62,18 @@ const Map = () => {
 
   const lineOptions = { color: "blue", opacity: 0.6 };
 
-  const buildRoute = async (selectedRow, requests) => {
-    const startPoint = getStartMarkerCoordinates(selectedRow, requests);
-    const finishPoint = getFinishMarkerCoordinates(selectedRow, requests);
-
-    const path = await getPolyline(startPoint, finishPoint);
-
-    console.log(path);
-
-    if (!path) {
-      setPolyline([]);
-      console.log("Не удалось загрузить путь между пунктами");
-      return;
-    }
-
-    for (let i = 0; i < path.length; i++) {
-      const [lon, lat] = path[i];
-      path[i] = [lat, lon];
-    }
-
-    path.unshift(startPoint);
-    path.push(finishPoint);
-
-    setPolyline(path);
-  };
-
   useEffect(() => {
     if (!selectedRow) return;
 
-    buildRoute(selectedRow, requests);
+    const startPoint = getStartMarkerCoordinates(selectedRow, requests);
+    const finishPoint = getFinishMarkerCoordinates(selectedRow, requests);
+
+    dispatch(fetchPath(startPoint, finishPoint));
   }, [selectedRow, requests]);
 
   return (
     <div className="map">
-      <MapContainer center={returnCenterPoint(selectedRow, requests)} zoom={5}>
+      <MapContainer center={[55.75232, 37.6116908]} zoom={5}>
         <ChangeView
           center={returnCenterPoint(selectedRow, requests)}
           zoom={5}

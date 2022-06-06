@@ -1,20 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Split from "react-split";
 import { Table } from "antd";
 
 import Map from "../Map";
 import SelectEdit from "../SelectEdit";
 
-import { Context } from "../../context";
+import { changeMapSize, changeSelectedRow } from "../../store/requestsReducer";
 
 const Requests = () => {
-  const {
-    selectedRow,
-    setSelectedRow,
-    requests,
-    updateMapSize,
-    setUpdateMapSize,
-  } = useContext(Context);
+  const { selectedRow, requests } = useSelector(
+    (state) => state.requestsReducer
+  );
+  const dispatch = useDispatch();
 
   const columns = [
     { title: "№", dataIndex: "number", key: "number", fixed: "left" },
@@ -44,7 +42,7 @@ const Requests = () => {
   const onClickRow = ({ number }) => {
     return {
       onClick: () => {
-        setSelectedRow(number);
+        dispatch(changeSelectedRow(number));
       },
     };
   };
@@ -55,8 +53,8 @@ const Requests = () => {
       : "table__row";
   };
 
-  const handleDrag = (sizes) => {
-    setUpdateMapSize((updateMapSize) => !updateMapSize);
+  const handleDrag = () => {
+    dispatch(changeMapSize());
   };
 
   return (

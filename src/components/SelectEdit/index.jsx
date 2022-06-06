@@ -1,14 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 
 import SelectStart from "../../components/SelectStart";
 import SelectFinish from "../../components/SelectFinish";
 
-import { Context } from "../../context";
-
 import "./styles.scss";
 
 const SelectEdit = ({ type, defaultValue, number }) => {
-  let { selectedRow } = useContext(Context);
+  const selectedRow = useSelector((state) => state.requestsReducer.selectedRow);
 
   return (
     <>

@@ -1,20 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { Select } from "antd";
 
+import { changeUnloadingPoint } from "../../store/requestsReducer";
+
 import { finishPoints } from "../../model/data";
-import { Context } from "../../context";
 
 const { Option } = Select;
 
 const SelectFinish = ({ defaultValue }) => {
-  const { selectedRow, setRequests } = useContext(Context);
+  const dispatch = useDispatch();
 
   const handleChange = (value) => {
-    setRequests((prevRequests) => {
-      const updatedRequests = [...prevRequests];
-      updatedRequests[selectedRow - 1].unloading = value;
-      return updatedRequests;
-    });
+    dispatch(changeUnloadingPoint(value));
   };
 
   return (
